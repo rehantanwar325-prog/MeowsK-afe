@@ -9,43 +9,13 @@ import { MenuSection } from './components/MenuSection';
 import { CatProfiles } from './components/CatProfiles';
 import { Testimonials } from './components/Testimonials';
 import { LocationContact } from './components/LocationContact';
-import { CartDrawer } from './components/CartDrawer';
 import { BookingModal } from './components/BookingModal';
-import { QuickActionBar } from './components/QuickActionBar';
 import { Footer } from './components/Footer';
-import { MenuItem } from './data/menuData';
-import { Calendar, ShoppingBag, PartyPopper } from 'lucide-react';
+import { PartyPopper } from 'lucide-react';
 
 export function App() {
-  const [cart, setCart] = useState<{ [id: string]: number }>({});
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('maggi-specials');
-
-  const handleAddToCart = (item: MenuItem) => {
-    setCart((prev) => ({
-      ...prev,
-      [item.id]: (prev[item.id] || 0) + 1,
-    }));
-  };
-
-  const handleRemoveFromCart = (itemId: string) => {
-    setCart((prev) => {
-      const updated = { ...prev };
-      if (updated[itemId] > 1) {
-        updated[itemId] -= 1;
-      } else {
-        delete updated[itemId];
-      }
-      return updated;
-    });
-  };
-
-  const handleClearCart = () => {
-    setCart({});
-  };
-
-  const totalCartCount = Object.values(cart).reduce((sum, count) => sum + count, 0);
 
   const scrollToMenu = () => {
     const el = document.getElementById('menu');
@@ -63,8 +33,6 @@ export function App() {
     <div className="min-h-screen bg-background text-text selection:bg-accent selection:text-background font-body overflow-x-hidden">
       {/* Floating Glass Pill Navbar */}
       <Navbar
-        cartCount={totalCartCount}
-        onOpenCart={() => setIsCartOpen(true)}
         onOpenBooking={() => setIsBookingOpen(true)}
       />
 
@@ -89,10 +57,6 @@ export function App() {
 
         {/* 6. Carefully Curated Offerings (Menu with Filter Tabs & Search) */}
         <MenuSection
-          cart={cart}
-          onAddToCart={handleAddToCart}
-          onRemoveFromCart={handleRemoveFromCart}
-          onOpenCart={() => setIsCartOpen(true)}
           selectedCategoryProp={selectedCategory}
         />
 
@@ -120,16 +84,6 @@ export function App() {
           <span className="text-xs uppercase tracking-widest font-semibold">Book Event / Party</span>
         </button>
       </div>
-
-      {/* Slide-over Cart Drawer */}
-      <CartDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        cart={cart}
-        onAddToCart={handleAddToCart}
-        onRemoveFromCart={handleRemoveFromCart}
-        onClearCart={handleClearCart}
-      />
 
       {/* Booking Modal */}
       <BookingModal

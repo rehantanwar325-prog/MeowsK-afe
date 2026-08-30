@@ -1,21 +1,13 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Plus, Minus, ShoppingBag, ArrowUpRight } from 'lucide-react';
-import { MENU_ITEMS, MENU_CATEGORIES, MenuItem } from '../data/menuData';
+import { Search, ArrowUpRight } from 'lucide-react';
+import { MENU_ITEMS, MENU_CATEGORIES } from '../data/menuData';
 import { CAFE_INFO } from '../data/cafeInfo';
 
 interface MenuSectionProps {
-  cart: { [id: string]: number };
-  onAddToCart: (item: MenuItem) => void;
-  onRemoveFromCart: (itemId: string) => void;
-  onOpenCart: () => void;
   selectedCategoryProp?: string;
 }
 
 export const MenuSection: React.FC<MenuSectionProps> = ({
-  cart,
-  onAddToCart,
-  onRemoveFromCart,
-  onOpenCart,
   selectedCategoryProp = 'maggi-specials',
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>(selectedCategoryProp);
@@ -40,8 +32,6 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
       return item.category === selectedCategory;
     });
   }, [selectedCategory, searchQuery]);
-
-  const totalCartCount = Object.values(cart).reduce((a, b) => a + b, 0);
 
   return (
     <section id="menu" className="min-h-screen bg-background py-20 lg:py-28 relative">
@@ -90,7 +80,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-muted hover:text-text px-2 py-1"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-muted hover:text-text px-2 py-1 cursor-pointer"
               >
                 Clear
               </button>
@@ -115,24 +105,6 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
           </div>
         </div>
 
-        {/* Floating Cart Indicator */}
-        {totalCartCount > 0 && (
-          <div className="max-w-4xl mx-auto mb-10 p-4 rounded-full glass border-accent/40 bg-accent/10 flex items-center justify-between shadow-2xl backdrop-blur-xl">
-            <div className="flex items-center gap-3 pl-3">
-              <ShoppingBag className="w-5 h-5 text-accent" />
-              <span className="font-display font-medium text-text text-sm sm:text-base">
-                {totalCartCount} {totalCartCount === 1 ? 'item' : 'items'} in your order
-              </span>
-            </div>
-            <button
-              onClick={onOpenCart}
-              className="px-6 py-2.5 rounded-full bg-accent text-background font-bold text-xs uppercase tracking-widest hover:bg-white transition-all shadow-md cursor-pointer"
-            >
-              View Cart &amp; Order →
-            </button>
-          </div>
-        )}
-
         {/* Menu Cards Grid */}
         {filteredItems.length === 0 ? (
           <div className="text-center py-20 glass p-8 rounded-[2rem] max-w-md mx-auto">
@@ -150,8 +122,6 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {filteredItems.map((item) => {
-              const qtyInCart = cart[item.id] || 0;
-
               return (
                 <div
                   key={item.id}
@@ -202,7 +172,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                     </p>
                   </div>
 
-                  {/* Bottom Price & Add to Cart */}
+                  {/* Bottom Price & Order Link */}
                   <div className="pt-4 border-t border-white/5 flex items-center justify-between">
                     <div>
                       <span className="text-[10px] text-muted block uppercase tracking-wider font-semibold">
@@ -213,33 +183,15 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                       </span>
                     </div>
 
-                    {qtyInCart === 0 ? (
-                      <button
-                        onClick={() => onAddToCart(item)}
-                        className="px-5 py-2.5 rounded-full bg-white/5 hover:bg-accent text-muted hover:text-background border border-white/10 hover:border-accent font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer transform hover:scale-105 active:scale-95"
-                      >
-                        <Plus size={14} />
-                        <span>Add</span>
-                      </button>
-                    ) : (
-                      <div className="flex items-center gap-2 bg-white/5 border border-accent/40 rounded-full p-1 shadow-md">
-                        <button
-                          onClick={() => onRemoveFromCart(item.id)}
-                          className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-text flex items-center justify-center transition-colors cursor-pointer"
-                        >
-                          <Minus size={13} />
-                        </button>
-                        <span className="font-bold text-sm text-accent px-1.5 min-w-[20px] text-center">
-                          {qtyInCart}
-                        </span>
-                        <button
-                          onClick={() => onAddToCart(item)}
-                          className="w-7 h-7 rounded-full bg-accent hover:bg-white text-background font-bold flex items-center justify-center transition-colors cursor-pointer"
-                        >
-                          <Plus size={13} />
-                        </button>
-                      </div>
-                    )}
+                    <a
+                      href={CAFE_INFO.zomatoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 rounded-full bg-white/5 hover:bg-accent text-muted hover:text-background border border-white/10 hover:border-accent font-semibold text-xs uppercase tracking-wider flex items-center gap-1 transition-all cursor-pointer transform hover:scale-105"
+                    >
+                      <span>Order</span>
+                      <ArrowUpRight size={13} />
+                    </a>
                   </div>
                 </div>
               );
@@ -250,4 +202,3 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
     </section>
   );
 };
-

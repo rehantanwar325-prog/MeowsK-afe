@@ -3,16 +3,12 @@ import { MapPin, ShoppingBag, Calendar, Menu as MenuIcon, X, PartyPopper } from 
 import { CAFE_INFO } from '../data/cafeInfo';
 
 interface NavbarProps {
-  cartCount: number;
-  onOpenCart: () => void;
   onOpenBooking: () => void;
   currentView?: 'home' | 'menu';
   onNavigate?: (view: 'home' | 'menu') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  cartCount,
-  onOpenCart,
   onOpenBooking,
   currentView = 'home',
   onNavigate,
@@ -139,20 +135,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <MapPin size={12} className="text-accent" />
                 <span className="hidden lg:inline">Find Us</span>
               </a>
-
-              {/* Cart Button */}
-              <button
-                onClick={onOpenCart}
-                className="relative p-2.5 rounded-full bg-white/5 hover:bg-accent/10 border border-white/5 hover:border-accent/20 text-accent transition-all cursor-pointer"
-                aria-label="View Order Cart"
-              >
-                <ShoppingBag size={15} />
-                {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-accent text-background text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-lg animate-pulse">
-                    {cartCount}
-                  </span>
-                )}
-              </button>
 
               {/* Order Online Button */}
               <a
