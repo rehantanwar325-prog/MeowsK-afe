@@ -19,18 +19,18 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
         {/* Menu Anchor */}
         <a
           href="#menu"
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-full text-muted hover:text-text active:scale-95 transition-colors"
+          className="flex flex-col items-center justify-center py-2 px-1 rounded-full text-muted hover:text-accent active:scale-95 transition-all"
         >
           <Utensils size={16} className="text-accent mb-0.5" />
           <span>Menu</span>
         </a>
 
-        {/* Order on Zomato Link */}
+        {/* Order Online Link */}
         <a
           href={CAFE_INFO.zomatoUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-full text-white bg-[#e23744] font-bold active:scale-95 transition-all shadow-md"
+          className="flex flex-col items-center justify-center py-2 px-1 rounded-full bg-accent text-background font-bold active:scale-95 transition-all shadow-md shadow-accent/20"
         >
           <ShoppingBag size={15} className="mb-0.5" />
           <span>Order</span>
@@ -39,9 +39,9 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
         {/* Book Event / Party Modal */}
         <button
           onClick={onOpenBooking}
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-full bg-accent text-background font-bold active:scale-95 transition-colors shadow-md"
+          className="flex flex-col items-center justify-center py-2 px-1 rounded-full bg-white/5 border border-accent/30 text-accent font-semibold active:scale-95 transition-all hover:bg-accent/10"
         >
-          <PartyPopper size={16} className="mb-0.5" />
+          <PartyPopper size={15} className="mb-0.5" />
           <span>Party</span>
         </button>
 
@@ -50,7 +50,7 @@ export const QuickActionBar: React.FC<QuickActionBarProps> = ({
           href={`https://wa.me/${CAFE_INFO.whatsapp}?text=Hello%20Meows%20K-afe!`}
           target="_blank"
           rel="noreferrer"
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-full text-muted hover:text-accent active:scale-95 transition-colors"
+          className="flex flex-col items-center justify-center py-2 px-1 rounded-full text-muted hover:text-accent active:scale-95 transition-all"
         >
           <MessageCircle size={16} className="text-accent mb-0.5" />
           <span>Chat</span>

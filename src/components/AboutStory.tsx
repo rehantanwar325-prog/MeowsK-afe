@@ -55,12 +55,14 @@ export const AboutStory: React.FC = () => {
               </ul>
 
               {/* CTA Link */}
-              <a
-                href="#menu"
-                className="w-fit px-8 py-3.5 border border-accent/30 rounded-full text-text hover:bg-accent hover:text-background transition-all duration-500 font-medium text-sm tracking-wider uppercase cursor-pointer"
-              >
-                View Complete Menu
-              </a>
+              <div className="pt-2">
+                <a
+                  href="#menu"
+                  className="inline-flex items-center justify-center px-8 py-3.5 border border-accent/40 rounded-full text-text hover:bg-accent hover:text-background transition-all duration-300 font-semibold text-xs tracking-[0.2em] uppercase whitespace-nowrap shadow-lg cursor-pointer max-w-full text-center"
+                >
+                  View Complete Menu
+                </a>
+              </div>
             </div>
           </div>
         </div>

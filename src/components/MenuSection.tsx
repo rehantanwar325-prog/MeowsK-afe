@@ -98,15 +98,15 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
           </div>
 
           {/* Category Tabs */}
-          <div className="flex items-center gap-2.5 overflow-x-auto pb-2 scrollbar-none justify-start md:justify-center">
+          <div className="flex items-center gap-3 overflow-x-auto pb-3 pt-1 scrollbar-none justify-start md:justify-center -mx-4 px-4 sm:mx-0 sm:px-0">
             {MENU_CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all duration-300 border cursor-pointer ${
+                className={`shrink-0 px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all duration-300 border cursor-pointer ${
                   selectedCategory === cat.id
-                    ? 'bg-accent text-background border-accent font-bold shadow-lg shadow-accent/20 scale-105'
-                    : 'glass text-muted border-white/5 hover:border-accent/30 hover:text-text'
+                    ? 'bg-accent text-background border-accent font-bold shadow-lg shadow-accent/25 scale-105'
+                    : 'bg-[#11140e]/70 text-muted border-white/10 hover:border-accent/40 hover:text-text'
                 }`}
               >
                 {cat.name}
