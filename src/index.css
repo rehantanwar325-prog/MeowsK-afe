@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-playfair: 'Playfair Display', Georgia, serif;
+    --font-dm-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    --color-bg: #0d0f0b;
+    --color-surface: #11140e;
+    --color-surface-card: rgba(17, 20, 14, 0.4);
+    --color-accent: #c8a96e;
+    --color-text: #f0ece4;
+    --color-muted: #8a8478;
+  }
+}
+
+body {
+  font-family: var(--font-dm-sans);
+  background-color: #0d0f0b;
+  color: #f0ece4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body ::selection,
+body::selection {
+  background-color: #c8a96e;
+  color: #0d0f0b;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-playfair);
+  letter-spacing: -0.025em;
+  font-weight: 500;
+}
+
+.font-body {
+  font-family: var(--font-dm-sans);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: #0d0f0b;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #c8a96e;
+}
+
+/* Glassmorphism & Sheen */
+.glass {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  background-color: rgba(15, 18, 13, 0.7);
+  border: 1px solid rgba(200, 169, 110, 0.15);
+  border-radius: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass::before {
+  content: "";
+  pointer-events: none;
+  z-index: 10;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  width: 60%;
+  height: 100%;
+  transition: all 0.75s ease;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  transform: skew(-25deg);
+}
+
+.glass:hover::before {
+  left: 150%;
+}
+
+.glass-hover {
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.glass-hover:hover {
+  transform: translateY(-0.25rem) scale(1.01);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  border-color: rgba(200, 169, 110, 0.3);
+}
+
+.glass-button {
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: 1rem 2rem;
+  font-weight: 500;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-button:hover {
+  transform: scale(1.05);
+  background-color: #c8a96e;
+  color: #0d0f0b;
+  box-shadow: 0 0 30px rgba(200, 169, 110, 0.2);
+}
+
+.glass-button:active {
+  transform: scale(0.95);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Custom Utilities for Coffee & Toast Theme */
+.text-accent {
+  color: #c8a96e;
+}
+
+.bg-accent {
+  background-color: #c8a96e;
+}
+
+.border-accent {
+  border-color: #c8a96e;
+}
+
+.text-muted {
+  color: #8a8478;
+}
+
+.bg-background {
+  background-color: #0d0f0b;
+}
+
+.text-text {
+  color: #f0ece4;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
