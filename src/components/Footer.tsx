@@ -4,7 +4,7 @@ import { CAFE_INFO } from '../data/cafeInfo';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="border-t border-white/5 mt-32 pt-16 pb-28 lg:pb-16 bg-[#0a0c08] text-text">
+    <footer className="border-t border-white/5 mt-32 py-16 bg-[#0a0c08] text-text">
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
         {/* Brand Info */}
         <div className="flex flex-col items-center md:items-start gap-2">

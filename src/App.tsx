@@ -136,13 +136,6 @@ export function App() {
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
       />
-
-      {/* Mobile Sticky Quick Action Bar */}
-      <QuickActionBar
-        cartCount={totalCartCount}
-        onOpenCart={() => setIsCartOpen(true)}
-        onOpenBooking={() => setIsBookingOpen(true)}
-      />
     </div>
   );
 }
