@@ -1,62 +1,51 @@
 import React from 'react';
-import { Calendar, ShoppingBag, MessageCircle, Utensils, PartyPopper } from 'lucide-react';
-import { CAFE_INFO } from '../data/cafeInfo';
+import { Phone, MessageCircle, Calendar, MapPin } from 'lucide-react';
+import { HOTEL_INFO } from '../data/hotelInfo';
 
 interface QuickActionBarProps {
-  cartCount: number;
-  onOpenCart: () => void;
   onOpenBooking: () => void;
 }
 
-export const QuickActionBar: React.FC<QuickActionBarProps> = ({
-  cartCount,
-  onOpenCart,
-  onOpenBooking,
-}) => {
+export const QuickActionBar: React.FC<QuickActionBarProps> = ({ onOpenBooking }) => {
   return (
-    <div className="fixed bottom-4 inset-x-4 z-40 lg:hidden p-2 rounded-full glass border-white/10 shadow-2xl bg-[#0d0f0b]/90 backdrop-blur-xl max-w-md mx-auto">
-      <div className="grid grid-cols-4 gap-1.5 text-center text-[10px] font-semibold">
-        {/* Menu Anchor */}
+    <aside aria-label="Mobile quick actions" className="fixed bottom-0 left-0 right-0 z-40 lg:hidden px-3 pt-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-[#0d0f0b]/95 backdrop-blur-xl border-t border-white/10 shadow-2xl">
+      <div className="grid grid-cols-4 gap-2">
         <a
-          href="#menu"
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-full text-muted hover:text-accent active:scale-95 transition-all"
+          href={`tel:${HOTEL_INFO.phone}`}
+          className="flex flex-col items-center justify-center p-2 rounded-xl bg-white/[0.04] text-text hover:text-accent border border-white/5 active:scale-95 transition-all text-center"
         >
-          <Utensils size={16} className="text-accent mb-0.5" />
-          <span>Menu</span>
+          <Phone size={16} className="text-accent" />
+          <span className="text-[10px] font-medium mt-1">Call</span>
         </a>
 
-        {/* Order Online Link */}
         <a
-          href={CAFE_INFO.zomatoUrl}
+          href={`https://wa.me/${HOTEL_INFO.whatsapp}?text=${encodeURIComponent('Namaste Hotel Shivansh, I want to book a room.')}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-full bg-accent text-background font-bold active:scale-95 transition-all shadow-md shadow-accent/20"
+          className="flex flex-col items-center justify-center p-2 rounded-xl bg-emerald-600/15 text-emerald-400 border border-emerald-500/25 active:scale-95 transition-all text-center"
         >
-          <ShoppingBag size={15} className="mb-0.5" />
-          <span>Order</span>
+          <MessageCircle size={16} />
+          <span className="text-[10px] font-medium mt-1">WhatsApp</span>
         </a>
 
-        {/* Book Event / Party Modal */}
+        <a
+          href={HOTEL_INFO.googleMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col items-center justify-center p-2 rounded-xl bg-white/[0.04] text-text hover:text-accent border border-white/5 active:scale-95 transition-all text-center"
+        >
+          <MapPin size={16} className="text-accent" />
+          <span className="text-[10px] font-medium mt-1">Map</span>
+        </a>
+
         <button
           onClick={onOpenBooking}
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-full bg-white/5 border border-accent/30 text-accent font-semibold active:scale-95 transition-all hover:bg-accent/10"
+          className="flex flex-col items-center justify-center p-2 rounded-xl bg-gradient-to-r from-accent to-[#b89552] text-[#0d0f0b] font-bold active:scale-95 transition-all text-center shadow-lg"
         >
-          <PartyPopper size={15} className="mb-0.5" />
-          <span>Party</span>
+          <Calendar size={16} />
+          <span className="text-[10px] font-bold mt-1 uppercase tracking-tight">Book Now</span>
         </button>
-
-        {/* WhatsApp Direct */}
-        <a
-          href={`https://wa.me/${CAFE_INFO.whatsapp}?text=Hello%20Meows%20K-afe!`}
-          target="_blank"
-          rel="noreferrer"
-          className="flex flex-col items-center justify-center py-2 px-1 rounded-full text-muted hover:text-accent active:scale-95 transition-all"
-        >
-          <MessageCircle size={16} className="text-accent mb-0.5" />
-          <span>Chat</span>
-        </a>
       </div>
-    </div>
+    </aside>
   );
 };
-

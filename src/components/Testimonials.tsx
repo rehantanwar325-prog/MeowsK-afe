@@ -1,103 +1,111 @@
 import React from 'react';
-import { Star, Quote, CheckCircle2 } from 'lucide-react';
+import { Star, ShieldCheck, Quote, ThumbsUp, ExternalLink } from 'lucide-react';
 import { REVIEWS_DATA } from '../data/reviewsData';
+import { HOTEL_INFO } from '../data/hotelInfo';
 
 export const Testimonials: React.FC = () => {
   return (
-    <section id="reviews" className="py-24 lg:py-32 relative bg-background text-text">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
-          <span className="text-xs tracking-[0.5em] uppercase text-accent font-bold mb-6 block">
-            Guest Experiences
-          </span>
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-display font-medium text-text mb-8 tracking-tighter">
-            Voices of <span className="italic font-light text-accent">Warmth</span>
-          </h2>
-          <p className="text-muted text-base sm:text-lg font-light max-w-2xl mx-auto leading-relaxed">
-            Rated 4.9 ★ by thousands of happy visitors who cherish our cozy craft, artisan Maggi &amp; toast, and soothing cat sanctuary.
-          </p>
-        </div>
+    <section id="reviews" className="py-24 px-4 sm:px-6 max-w-7xl mx-auto relative">
+      {/* Background glow */}
+      <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[170px] pointer-events-none" />
 
-        {/* Rating Overview Badge Banner */}
-        <div className="max-w-3xl mx-auto mb-16 p-6 sm:p-8 rounded-[2rem] glass border-white/5 bg-[#11140e]/60 flex flex-col sm:flex-row items-center justify-around gap-6 text-center sm:text-left">
-          <div className="flex items-center gap-4">
-            <div className="text-4xl font-display font-medium text-accent">4.9</div>
-            <div>
-              <div className="flex text-accent gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} className="fill-accent text-accent" />
-                ))}
-              </div>
-              <span className="text-xs text-muted font-light mt-1 block">Based on 500+ Google Reviews</span>
+      {/* Header */}
+      <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-amber-500/15 text-amber-300 border border-amber-500/30">
+          <Star size={13} className="fill-amber-400 text-amber-400" />
+          <span>Justdial 5.0 ★ Perfect Rating</span>
+        </div>
+        <h2 className="text-4xl sm:text-5xl font-display font-medium text-text">
+          Stories from Our Cherished Guests
+        </h2>
+        <p className="text-base sm:text-lg text-text/75 font-light leading-relaxed">
+          100% verified guest ratings on Justdial praise Hotel Shivansh for its tidy welcoming lobby, spacious air-conditioned rooms, delicious food, and warm multi-language hospitality.
+        </p>
+
+        {/* Rating Breakdown Pill */}
+        <div className="pt-2 flex flex-wrap items-center justify-center gap-4 text-xs">
+          <div className="glass px-4 py-2 rounded-full border border-accent/30 flex items-center gap-2">
+            <span className="text-amber-400 font-bold text-sm">5.0 / 5.0</span>
+            <div className="flex gap-0.5 text-amber-400">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={12} className="fill-amber-400" />
+              ))}
             </div>
+            <span className="text-muted">| 11 Justdial Reviews</span>
           </div>
 
-          <div className="h-8 w-px bg-white/10 hidden sm:block" />
-
-          <div className="flex items-center gap-2 text-xs text-text font-light">
-            <CheckCircle2 size={18} className="text-accent" />
-            <span>100% Verified Guest Feedback</span>
+          <div className="glass px-4 py-2 rounded-full border border-emerald-500/30 text-emerald-300 flex items-center gap-1.5">
+            <ShieldCheck size={14} />
+            <span>100% Verified Customer Feedback</span>
           </div>
-
-          <a
-            href="https://www.google.com/maps/search/Meows+K-afe+Sikar+Rajasthan"
-            target="_blank"
-            rel="noreferrer"
-            className="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-text text-xs uppercase tracking-wider font-semibold hover:border-accent hover:text-accent transition-colors"
-          >
-            Review Us on Google
-          </a>
         </div>
+      </div>
 
-        {/* Reviews Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {REVIEWS_DATA.slice(0, 3).map((review) => (
-            <div
-              key={review.id}
-              className="glass glass-hover p-8 rounded-[2rem] border-white/5 bg-[#11140e]/40 flex flex-col justify-between group"
-            >
-              <div>
-                {/* Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-full bg-accent/20 border border-accent/30 text-accent font-display font-bold text-base flex items-center justify-center shadow-md">
-                      {review.avatarLetter}
-                    </div>
-                    <div>
-                      <h4 className="font-display font-medium text-text text-base">{review.author}</h4>
-                      <span className="text-[10px] uppercase tracking-wider text-muted font-light">
-                        {review.date} • {review.source}
-                      </span>
-                    </div>
+      {/* Reviews Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {REVIEWS_DATA.map((rev) => (
+          <div
+            key={rev.id}
+            className="glass !rounded-3xl p-6 sm:p-7 border border-white/10 hover:border-accent/40 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 bg-[#11140e]/90"
+          >
+            <div className="space-y-4">
+              {/* Header with Avatar & Source */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-10 h-10 rounded-full ${rev.accentColor} text-white font-bold flex items-center justify-center text-sm shadow-md`}
+                  >
+                    {rev.avatarLetter}
                   </div>
-                  <Quote size={22} className="text-accent/30 group-hover:text-accent transition-colors" />
+                  <div>
+                    <h3 className="font-display font-medium text-base text-text">
+                      {rev.author}
+                    </h3>
+                    <p className="text-[11px] text-muted">{rev.date}</p>
+                  </div>
                 </div>
 
-                {/* Stars */}
-                <div className="flex text-accent gap-1 mb-4">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} size={14} className="fill-accent text-accent" />
-                  ))}
-                </div>
-
-                {/* Comment */}
-                <p className="text-sm text-text/90 leading-relaxed font-light">
-                  "{review.comment}"
-                </p>
-              </div>
-
-              {/* Tag */}
-              <div className="mt-6 pt-4 border-t border-white/5">
-                <span className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] font-semibold text-accent uppercase tracking-wider">
-                  {review.tag}
+                <span className="text-[10px] uppercase tracking-wider font-semibold text-accent px-2 py-0.5 rounded bg-accent/10 border border-accent/20">
+                  {rev.source}
                 </span>
               </div>
+
+              {/* Stars */}
+              <div className="flex gap-1 text-amber-400">
+                {[...Array(rev.rating)].map((_, i) => (
+                  <Star key={i} size={13} className="fill-amber-400" />
+                ))}
+              </div>
+
+              {/* Comment */}
+              <p className="text-xs sm:text-sm text-text/80 leading-relaxed font-light italic">
+                &ldquo;{rev.comment}&rdquo;
+              </p>
             </div>
-          ))}
-        </div>
+
+            {/* Tag Badge */}
+            <div className="pt-4 mt-4 border-t border-white/5 flex items-center justify-between text-xs">
+              <span className="text-accent/90 font-medium text-[11px] truncate">
+                {rev.tag}
+              </span>
+              <ThumbsUp size={12} className="text-muted group-hover:text-accent transition-colors" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Justdial Official Profile CTA */}
+      <div className="mt-14 text-center">
+        <a
+          href={HOTEL_INFO.justdialUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2.5 px-7 py-3.5 glass !rounded-full text-xs font-bold uppercase tracking-wider text-text hover:text-accent border border-accent/30 hover:border-accent hover:bg-accent/10 transition-all shadow-xl"
+        >
+          <span>Read all Reviews &amp; Check Ratings on Justdial</span>
+          <ExternalLink size={14} className="text-accent" />
+        </a>
       </div>
     </section>
   );
 };
-

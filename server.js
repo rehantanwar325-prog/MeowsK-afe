@@ -72,5 +72,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Meows K-afe server running at http://localhost:${PORT}`);
+  console.log(`HOTEL SHIVANSH server running at http://localhost:${PORT}`);
 });

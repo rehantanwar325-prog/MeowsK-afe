@@ -1,32 +1,28 @@
-# React + TypeScript + Vite
+# HOTEL SHIVANSH | Sikar, Rajasthan
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Official website and booking portal for **HOTEL SHIVANSH**, premier hotel accommodation in Sikar, Rajasthan located opposite the Central Roadways Bus Depot. Gateway to Shri Khatu Shyam Ji (45 km) and Salasar Balaji (50 km).
 
-Currently, two official plugins are available:
+## Features
+- **Online Booking Engine**: Direct room reservations with instant voucher generation and ₹0 advance option (Pay at Hotel).
+- **Yatra & Cab Fare Calculator**: Live distance and round-trip cab booking for Khatu Shyam Ji and Salasar Balaji.
+- **In-House Dining Room Service**: Pure vegetarian kitchen menu with interactive WhatsApp room ordering.
+- **Mobile Optimized**: Seamless layout, touch-friendly reservation modal, and responsive action bar for smartphones.
+- **24/7 Digital Concierge**: Instant smart front desk assistance.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
+- **Framework**: React 19 + TypeScript + Vite
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Deployment**: Vercel
 
-## React Compiler
+## Development
+```bash
+# Install dependencies
+npm install
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# Start local dev server
+npm run dev
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+# Production build
+npm run build
 ```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.

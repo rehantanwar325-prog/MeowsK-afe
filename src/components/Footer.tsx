@@ -1,93 +1,172 @@
 import React from 'react';
-import { MapPin } from 'lucide-react';
-import { CAFE_INFO } from '../data/cafeInfo';
+import { MapPin, Phone, MessageCircle, Mail, Star, ExternalLink, ShieldCheck, Heart } from 'lucide-react';
+import { HOTEL_INFO } from '../data/hotelInfo';
+import { ROOMS_DATA } from '../data/roomsData';
 
 export const Footer: React.FC = () => {
-  return (
-    <footer className="border-t border-white/5 mt-32 py-16 bg-[#0a0c08] text-text">
-      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-        {/* Brand Info */}
-        <div className="flex flex-col items-center md:items-start gap-2">
-          <a className="flex items-center gap-3 text-accent group" href="#">
-            <div className="relative w-9 h-9 transform transition-transform duration-500 group-hover:rotate-[360deg]">
-              <img
-                alt="Meows K-afe Logo"
-                loading="lazy"
-                className="object-cover rounded-full border border-accent/20 w-full h-full"
-                src="/images/meows-kafe-logo-sign.jpg"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display font-medium text-xl tracking-wide text-text group-hover:text-accent transition-colors">
-                Meows K-afe
-              </span>
-              <span className="text-[10px] text-accent uppercase tracking-widest font-semibold">
-                The Conversation Forest
-              </span>
-            </div>
-          </a>
-          <p className="text-muted text-sm font-light">Sikar's coziest forest lounge &amp; feline sanctuary.</p>
-        </div>
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-        {/* Links & Socials */}
-        <div className="flex flex-col items-center md:items-end gap-4">
-          <div className="flex gap-6 items-center">
-            <a
-              className="text-xs tracking-[0.2em] uppercase text-muted hover:text-text transition-colors font-semibold"
-              href="#menu"
-            >
-              Menu
-            </a>
-            <a
-              className="text-xs tracking-[0.2em] uppercase text-muted hover:text-text transition-colors font-semibold"
-              href="#gallery"
-            >
-              Gallery
-            </a>
-            <a
-              className="text-xs tracking-[0.2em] uppercase text-muted hover:text-text transition-colors font-semibold"
-              href="#story"
-            >
-              Legacy
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit our Instagram"
-              className="text-muted hover:text-accent transition-colors"
-            >
-              <svg className="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-              </svg>
-            </a>
+  return (
+    <footer className="border-t border-white/10 bg-[#0a0c08] text-text pt-16 pb-28 sm:pb-16 relative overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-accent/5 rounded-full blur-[160px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+          {/* Col 1: Brand Info (2 cols on LG) */}
+          <div className="lg:col-span-2 space-y-5">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full p-0.5 border border-accent/40 bg-gradient-to-br from-accent/30 to-black/80 flex items-center justify-center shadow-lg">
+                <img src="/favicon.svg" alt="Shivansh Emblem" className="w-full h-full object-contain" />
+              </div>
+              <div>
+                <h3 className="font-display font-semibold text-xl tracking-tight text-text">
+                  HOTEL SHIVANSH
+                </h3>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-accent font-medium mt-0.5">
+                  Opposite Roadways Bus Depot • Sikar
+                </p>
+              </div>
+            </div>
+
+            <p className="text-xs sm:text-sm text-text/75 font-light leading-relaxed max-w-sm">
+              Sikar’s premier hospitality stay starting at ₹1,999/night. Modern AC rooms, room heaters, pure dining, free valet parking, and effortless transit to Khatu Shyam Ji and Salasar Balaji.
+            </p>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold bg-amber-500/10 text-amber-300 border border-amber-500/25">
+              <Star size={13} className="fill-amber-400 text-amber-400" />
+              <span>Rated 5.0 on Justdial (11 Reviews • 55 Photos)</span>
+            </div>
           </div>
 
-          <a
-            href={CAFE_INFO.googleMapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-xs text-muted hover:text-accent transition-colors font-light"
-          >
-            <MapPin size={15} className="text-accent" />
-            <span>Santosh Colony, Sikar, Rajasthan</span>
-          </a>
-        </div>
-      </div>
+          {/* Col 2: Accommodations */}
+          <div className="space-y-4 text-xs">
+            <h4 className="font-display font-medium text-sm text-text uppercase tracking-widest text-accent">
+              Rooms &amp; Tariffs
+            </h4>
+            <ul className="space-y-2.5">
+              {ROOMS_DATA.map((r) => (
+                <li key={r.id}>
+                  <button
+                    onClick={() => scrollTo('rooms')}
+                    className="text-text/70 hover:text-accent transition-colors flex items-center justify-between w-full text-left"
+                  >
+                    <span>{r.name}</span>
+                    <span className="text-accent font-bold">₹{r.pricePerNight}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-      {/* Copyright Bar */}
-      <div className="max-w-6xl mx-auto px-6 mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted/60 font-light">
-        <p className="text-[#9e9a92]">
-          © {new Date().getFullYear()} Meows K-afe (The Conversation Forest). All rights reserved.
-        </p>
-        <p>
-          Crafted with care for coffee lovers, cozy conversations &amp; resident cats.
-        </p>
+          {/* Col 3: Pilgrimage & Tourism */}
+          <div className="space-y-4 text-xs">
+            <h4 className="font-display font-medium text-sm text-text uppercase tracking-widest text-accent">
+              Pilgrimage Hub
+            </h4>
+            <ul className="space-y-2.5">
+              <li>
+                <button
+                  onClick={() => scrollTo('pilgrimage')}
+                  className="text-text/70 hover:text-accent transition-colors block"
+                >
+                  Shree Khatu Shyam Ji (45 KM)
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollTo('pilgrimage')}
+                  className="text-text/70 hover:text-accent transition-colors block"
+                >
+                  Shree Salasar Balaji Mandir (50 KM)
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollTo('pilgrimage')}
+                  className="text-text/70 hover:text-accent transition-colors block"
+                >
+                  Jeen Mata Shakti Peeth (28 KM)
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollTo('pilgrimage')}
+                  className="text-text/70 hover:text-accent transition-colors block"
+                >
+                  Harshnath Mahadev Temple (14 KM)
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollTo('pilgrimage')}
+                  className="text-text/70 hover:text-accent transition-colors block"
+                >
+                  Sikar Clock Tower &amp; Havelis (1 KM)
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 4: Contact & Location */}
+          <div className="space-y-4 text-xs">
+            <h4 className="font-display font-medium text-sm text-text uppercase tracking-widest text-accent">
+              Contact 24/7
+            </h4>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-2 text-text/75">
+                <MapPin size={14} className="text-accent shrink-0 mt-0.5" />
+                <span>{HOTEL_INFO.fullAddress}</span>
+              </li>
+              <li>
+                <a
+                  href={`tel:${HOTEL_INFO.phone}`}
+                  className="flex items-center gap-2 text-text/80 hover:text-accent transition-colors"
+                >
+                  <Phone size={14} className="text-accent shrink-0" />
+                  <span>{HOTEL_INFO.displayPhone}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`https://wa.me/${HOTEL_INFO.whatsapp}?text=${encodeURIComponent('Namaste Hotel Shivansh, I want to book a room.')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-emerald-400 hover:text-white transition-colors"
+                >
+                  <MessageCircle size={14} className="shrink-0" />
+                  <span>WhatsApp: {HOTEL_INFO.displayWhatsapp}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={HOTEL_INFO.justdialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-accent hover:underline"
+                >
+                  <span>Justdial Verified Page</span>
+                  <ExternalLink size={11} />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar: Copyright & Payment Badges */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text/60">
+          <p>© {new Date().getFullYear()} HOTEL SHIVANSH. All rights reserved. Opposite Roadways Bus Depot, Sikar 332001.</p>
+          <div className="flex items-center gap-2">
+            <span>Payment Accepted:</span>
+            <span className="text-text/90 font-medium">Cash • UPI (GPay / PhonePe / Paytm) • Cards • Net Banking</span>
+          </div>
+        </div>
       </div>
     </footer>
   );
 };
-
-

@@ -3,67 +3,91 @@ export interface Review {
   author: string;
   rating: number;
   date: string;
-  source: 'Google Review' | 'Zomato' | 'Instagram';
+  source: 'Justdial Verified' | 'Google Reviews' | 'MakeMyTrip';
   comment: string;
   tag: string;
   avatarLetter: string;
   accentColor: string;
+  verifiedBooking?: boolean;
 }
 
 export const REVIEWS_DATA: Review[] = [
   {
     id: 'rev-1',
-    author: 'Aarav Sharma',
+    author: 'Sapna Tak',
     rating: 5,
-    date: '2 days ago',
-    source: 'Google Review',
-    comment: 'The ambience is out of this world! That illuminated cat mural bench is pure art. We ordered the signature Maggi and Kulhad Chai—both were phenomenal. Milo came and slept right beside us while we played Uno. 10/10 recommendation!',
-    tag: 'Signature Maggi & Cat Cuddles',
-    avatarLetter: 'A',
+    date: '5th June, 2026',
+    source: 'Justdial Verified',
+    comment:
+      'My stay at HOTEL SHIVANSH was delightful! The tidy lobby welcomed me with warmth, setting a relaxing tone for my visit. It’s budget-friendly, making it perfect for leisure travelers like me. The highlight was the tasty food – every meal was a treat! Overall, it provided a refreshing escape without breaking the bank. Highly recommended!',
+    tag: 'Delightful Stay & Tasty Food',
+    avatarLetter: 'S',
     accentColor: 'bg-amber-600',
+    verifiedBooking: true,
   },
   {
     id: 'rev-2',
-    author: 'Priya Rathore',
+    author: 'Kajal Goyal',
     rating: 5,
-    date: '1 week ago',
-    source: 'Google Review',
-    comment: 'Finally a cafe that lives up to the hype! "The Conversation Forest" tagline is truly felt. The warm lighting, cozy cushions, and peaceful vibe make it the best place for long chats or work-from-cafe sessions.',
-    tag: 'Aesthetic Ambience & Work Friendly',
-    avatarLetter: 'P',
+    date: '5th June, 2026',
+    source: 'Justdial Verified',
+    comment:
+      'I had a great time at HOTEL SHIVANSH. It is a comfortable place to stay. The food was very tasty, and I enjoyed every meal. The location is great, making it easy to explore the area. The rooms are large and nice, perfect for relaxing. It is also budget-friendly, which is good for saving money. Plus, they have multi-language support, so I could talk easily with the staff. Overall, my experience was really good!',
+    tag: 'Comfortable, Tasty Food & Great Location',
+    avatarLetter: 'K',
     accentColor: 'bg-emerald-700',
+    verifiedBooking: true,
   },
   {
     id: 'rev-3',
-    author: 'Devendra Verma',
+    author: 'Surendra Kumar Punia',
     rating: 5,
-    date: '2 weeks ago',
-    source: 'Google Review',
-    comment: 'Best Maggi in town without a doubt! Served hot with amazing spices. The cat mural with glowing mirror eyes is the coolest photo spot. Staff is super warm and caring towards both guests and the cats.',
-    tag: 'Must Try Food & Photo Spot',
-    avatarLetter: 'D',
-    accentColor: 'bg-amber-700',
+    date: '5th June, 2026',
+    source: 'Justdial Verified',
+    comment:
+      'My stay at HOTEL SHIVANSH was delightful! The tidy lobby set a welcoming tone, and the large rooms offered plenty of space to relax. It’s budget-friendly without compromising comfort. The staff were warm and attentive, providing excellent service with multi-language support that made communication easy. A perfect choice for a leisure stay!',
+    tag: 'Warm Staff & Multi-Language Support',
+    avatarLetter: 'S',
+    accentColor: 'bg-indigo-700',
+    verifiedBooking: true,
   },
   {
     id: 'rev-4',
-    author: 'Sneha & Harshita',
+    author: 'Devendra',
     rating: 5,
-    date: '3 weeks ago',
-    source: 'Instagram',
-    comment: 'Celebrated my friend’s birthday here. The fairy light outdoor entrance and night vibe are magical. We took so many gorgeous pictures at the cat eyes wall!',
-    tag: 'Perfect Birthday & Meetup Vibe',
-    avatarLetter: 'S',
-    accentColor: 'bg-rose-700',
+    date: '5th June, 2026',
+    source: 'Justdial Verified',
+    comment:
+      'HOTEL SHIVANSH is a great place! It has good vibes and feels very nice. The property is excellent, and I had a relaxing stay. The breakfast spread is massive and tasty! They also have good offers for groups. My room was clean and comfortable. I enjoyed my time here very much. I recommend HOTEL SHIVANSH for everyone who wants to relax and have fun!',
+    tag: 'Massive Breakfast Spread & Group Offers',
+    avatarLetter: 'D',
+    accentColor: 'bg-amber-700',
+    verifiedBooking: true,
   },
   {
     id: 'rev-5',
-    author: 'Vikramaditya S.',
+    author: 'Magic S P A',
     rating: 5,
-    date: '1 month ago',
-    source: 'Google Review',
-    comment: 'The Hazelnut Cappuccino and Cheese Garlic Bread are delicious. Love that it is a calm, respectful environment where you can unwind with good coffee and sweet cats.',
-    tag: 'Artisan Brews & Great Service',
-    avatarLetter: 'V',
+    date: '5th June, 2026',
+    source: 'Justdial Verified',
+    comment:
+      'I recently stayed at HOTEL SHIVANSH and it was an amazing experience! The staff were very friendly and helpful, making me feel right at home. The rooms were clean and comfortable, with great views. I loved the delicious food they served, especially breakfast! The location is perfect for exploring nearby attractions. I highly recommend HOTEL SHIVANSH for a wonderful getaway!',
+    tag: 'Clean Rooms & Friendly Hospitality',
+    avatarLetter: 'M',
+    accentColor: 'bg-rose-700',
+    verifiedBooking: true,
+  },
+  {
+    id: 'rev-6',
+    author: 'Nitesh Kumar',
+    rating: 5,
+    date: '6th January, 2026',
+    source: 'Justdial Verified',
+    comment:
+      'Hotel Shivansh is a hidden gem for leisure stays! Nestled in lush greenery, this centrally located hotel offers spacious rooms and exceptional group offers. The friendly staff goes above and beyond to ensure a pleasant stay. Plus, their multi-language support makes it accessible for everyone. Whether you’re traveling with family or friends, Hotel Shivansh provides the perfect blend of comfort and convenience.',
+    tag: 'Centrally Located & Family Friendly',
+    avatarLetter: 'N',
     accentColor: 'bg-teal-700',
+    verifiedBooking: true,
   },
 ];

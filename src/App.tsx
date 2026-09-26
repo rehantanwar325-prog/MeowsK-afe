@@ -1,98 +1,149 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { CoreFeatures } from './components/CoreFeatures';
-import { CategoryShowcase } from './components/CategoryShowcase';
+import { RoomsSection } from './components/RoomsSection';
+import { BookingSection } from './components/BookingSection';
+import { YatraPlanner } from './components/YatraPlanner';
+import { AmenitiesSection } from './components/AmenitiesSection';
 import { GallerySection } from './components/GallerySection';
+import { DiningSection } from './components/DiningSection';
 import { AboutStory } from './components/AboutStory';
-import { MenuSection } from './components/MenuSection';
-import { CatProfiles } from './components/CatProfiles';
 import { Testimonials } from './components/Testimonials';
 import { LocationContact } from './components/LocationContact';
-import { BookingModal } from './components/BookingModal';
 import { Footer } from './components/Footer';
-import { PartyPopper } from 'lucide-react';
+import { BookingModal } from './components/BookingModal';
+import { RoomComparisonModal } from './components/RoomComparisonModal';
+import { ConciergeChat } from './components/ConciergeChat';
+import { QuickActionBar } from './components/QuickActionBar';
+import { Calendar, MessageCircle, Phone } from 'lucide-react';
+import { HOTEL_INFO } from './data/hotelInfo';
 
 export function App() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string>('maggi-specials');
+  const [isCompareOpen, setIsCompareOpen] = useState(false);
+  const [selectedRoomId, setSelectedRoomId] = useState<string>('deluxe-ac-room');
+  const [bookingPrefill, setBookingPrefill] = useState<{
+    checkIn: string;
+    checkOut: string;
+    guests: string;
+  } | undefined>(undefined);
 
-  const scrollToMenu = () => {
-    const el = document.getElementById('menu');
+  const handleOpenBookingModal = (
+    roomId?: string,
+    prefill?: { checkIn: string; checkOut: string; guests: string }
+  ) => {
+    if (roomId) setSelectedRoomId(roomId);
+    if (prefill) setBookingPrefill(prefill);
+    setIsBookingOpen(true);
+  };
+
+  const handleSelectRoomToBook = (roomId: string) => {
+    setSelectedRoomId(roomId);
+    const el = document.getElementById('book-online');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      setIsBookingOpen(true);
+    }
+  };
+
+  const scrollToRooms = () => {
+    const el = document.getElementById('rooms');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  const handleSelectCategoryFromShowcase = (categorySlug: string) => {
-    setSelectedCategory(categorySlug);
-    scrollToMenu();
-  };
-
   return (
-    <div className="min-h-screen bg-background text-text selection:bg-accent selection:text-background font-body overflow-x-hidden">
+    <div className="min-h-screen bg-[#0d0f0b] text-[#f0ece4] selection:bg-accent selection:text-[#0d0f0b] font-body overflow-x-hidden">
       {/* Floating Glass Pill Navbar */}
-      <Navbar
-        onOpenBooking={() => setIsBookingOpen(true)}
-      />
+      <Navbar onOpenBooking={() => handleOpenBookingModal()} />
 
       <main>
-        {/* 1. Hero Section */}
+        {/* 1. Hero Section with Live Badges & Quick Checker */}
         <Hero
-          onOpenBooking={() => setIsBookingOpen(true)}
-          onExploreMenu={scrollToMenu}
+          onOpenBooking={handleOpenBookingModal}
+          onExploreRooms={scrollToRooms}
         />
 
-        {/* 2. Core Features (4 Glass Cards with Rotating Badges) */}
-        <CoreFeatures />
+        {/* 2. Rooms & Suites Section (Starting at ₹1,999) */}
+        <RoomsSection
+          onBookRoom={handleSelectRoomToBook}
+          onOpenCompare={() => setIsCompareOpen(true)}
+        />
 
-        {/* 3. Category Showcase (Alternating 3D Perspective Split Cards) */}
-        <CategoryShowcase onSelectCategory={handleSelectCategoryFromShowcase} />
+        {/* 3. Comprehensive Online Booking Engine with Promo Codes & Live UPI QR */}
+        <BookingSection preselectedRoomId={selectedRoomId} />
 
-        {/* 4. The Canvas: Morning Glow (8-Photo Grid Gallery) */}
+        {/* 4. Live Aarti Timings & Yatra Cab Fare Calculator */}
+        <YatraPlanner />
+
+        {/* 5. Comprehensive Amenities & Facilities */}
+        <AmenitiesSection />
+
+        {/* 6. Property Visual Tour & 55+ Verified Photos Gallery */}
         <GallerySection />
 
-        {/* 5. Our Legacy (Crafting Moments One Cup at a Time) */}
+        {/* 7. In-House Dining with Interactive Room Service Food Tray */}
+        <DiningSection />
+
+        {/* 8. Hotel Story, Heritage & 2025 Vision */}
         <AboutStory />
 
-        {/* 6. Carefully Curated Offerings (Menu with Filter Tabs & Search) */}
-        <MenuSection
-          selectedCategoryProp={selectedCategory}
-        />
-
-        {/* 7. Resident Cats Sanctuary & Etiquette */}
-        <CatProfiles onOpenBooking={() => setIsBookingOpen(true)} />
-
-        {/* 8. Verified Guest Testimonials */}
+        {/* 9. 5.0 ★ Justdial Verified Guest Reviews */}
         <Testimonials />
 
-        {/* 9. Location & Sanctuary Contact */}
+        {/* 10. Prime Central Location (Opposite Roadways Depot) & Contact */}
         <LocationContact />
       </main>
 
       {/* Footer */}
       <Footer />
 
-      {/* Floating Action Button (Event & Party Booking) */}
-      <div className="fixed bottom-8 right-8 z-40 hidden lg:block">
+      {/* 24/7 Intelligent Virtual Front Desk Concierge */}
+      <ConciergeChat onBookNow={() => handleOpenBookingModal()} />
+
+      {/* Side-by-side Room Comparison Matrix Modal */}
+      <RoomComparisonModal
+        isOpen={isCompareOpen}
+        onClose={() => setIsCompareOpen(false)}
+        onSelectRoom={handleSelectRoomToBook}
+      />
+
+      {/* Desktop Floating Action Pill (Quick Book & WhatsApp) */}
+      <div className="fixed bottom-8 right-8 z-40 hidden lg:flex items-center gap-3">
+        <a
+          href={`https://wa.me/${HOTEL_INFO.whatsapp}?text=${encodeURIComponent('Namaste Hotel Shivansh, I want to book a room.')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="glass p-3.5 rounded-full text-emerald-400 hover:text-white hover:bg-emerald-600 border border-emerald-500/40 shadow-2xl transition-all cursor-pointer flex items-center justify-center hover:scale-110"
+          title="Chat on WhatsApp"
+        >
+          <MessageCircle size={20} />
+        </a>
+
         <button
-          onClick={() => setIsBookingOpen(true)}
-          className="glass glass-button px-6 py-3.5 rounded-full flex items-center gap-2.5 text-text border border-accent/40 shadow-2xl hover:border-accent group cursor-pointer bg-[#11140e]/90 hover:scale-105 transition-all"
+          onClick={() => handleOpenBookingModal()}
+          className="glass glass-button px-6 py-3.5 rounded-full flex items-center gap-2.5 text-text border border-accent/40 shadow-2xl hover:border-accent group cursor-pointer bg-[#11140e]/95 hover:scale-105 transition-all"
         >
           <div className="w-2 h-2 rounded-full bg-accent animate-ping" />
-          <PartyPopper size={16} className="text-accent group-hover:rotate-12 transition-transform" />
-          <span className="text-xs uppercase tracking-widest font-semibold">Book Event / Party</span>
+          <Calendar size={16} className="text-accent group-hover:rotate-12 transition-transform" />
+          <span className="text-xs uppercase tracking-widest font-semibold">Book Room (From ₹1,999)</span>
         </button>
       </div>
 
-      {/* Booking Modal */}
+      {/* Mobile Floating Bottom Bar */}
+      <QuickActionBar onOpenBooking={() => handleOpenBookingModal()} />
+
+      {/* Interactive Booking Modal */}
       <BookingModal
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
+        initialRoomId={selectedRoomId}
+        initialPrefill={bookingPrefill}
       />
     </div>
   );
 }
 
 export default App;
-
